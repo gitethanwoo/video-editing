@@ -1,0 +1,16 @@
+.DS_Store
+__pycache__/
+*.pyc
+node_modules/
+.venv/
+dist/
+build/
+*.mp4
+*.mov
+*.mkv
+*.wav
+*.mp3
+*.flac
+analysis/
+work/
+output/

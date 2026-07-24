@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Editing Analyzer"
+  short_description: "Reverse-engineer shots, sound, titles, and pacing"
+  default_prompt: "Use $analyze-video-editing to break down this video’s shots, camera motion, sound, titles, pacing, and editorial structure."

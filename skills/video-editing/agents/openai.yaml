@@ -1,0 +1,4 @@
+interface:
+  display_name: "Video Editing Workbench"
+  short_description: "Edit arbitrary footage with graphics and motion"
+  default_prompt: "Use $video-editing to inspect my media, design the edit, create any needed graphics, render drafts, review transitions, and deliver a validated final video."

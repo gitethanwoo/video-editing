@@ -1,0 +1,25 @@
+{
+  "name": "video-editing-motion-project",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "remotion studio src/index.ts",
+    "typecheck": "tsc --noEmit",
+    "render:draft": "remotion render src/index.ts VideoEdit output/draft.mp4 --props=project.example.json --codec=h264 --pixel-format=yuv420p --scale=0.5 --crf=28",
+    "render:video": "remotion render src/index.ts VideoEdit output/video.mp4 --props=project.example.json --codec=h264 --pixel-format=yuv420p",
+    "render:overlay": "remotion render src/index.ts MotionOverlay output/overlay.mov --props=project.overlay.example.json --image-format=png --pixel-format=yuva444p10le --codec=prores --prores-profile=4444 --muted",
+    "still": "remotion still src/index.ts VideoEdit output/still.png --props=project.example.json --frame=45"
+  },
+  "dependencies": {
+    "@remotion/cli": "4.0.489",
+    "@remotion/media": "4.0.489",
+    "react": "18.3.1",
+    "react-dom": "18.3.1",
+    "remotion": "4.0.489"
+  },
+  "devDependencies": {
+    "@types/react": "18.3.23",
+    "@types/react-dom": "18.3.7",
+    "typescript": "5.8.3"
+  }
+}

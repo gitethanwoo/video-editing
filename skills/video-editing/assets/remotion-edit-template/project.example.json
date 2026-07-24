@@ -1,0 +1,14 @@
+{
+  "canvas": {
+    "width": 1920,
+    "height": 1080,
+    "fps": 30,
+    "durationInFrames": 150,
+    "background": "#10131a"
+  },
+  "media": {},
+  "title": "A reusable motion layer",
+  "subtitle": "React layout, SVG animation, local media, and alpha output",
+  "accent": "#72E6C1",
+  "transparent": false
+}

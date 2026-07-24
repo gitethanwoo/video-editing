@@ -1,0 +1,28 @@
+name: Validate skills
+
+on:
+  push:
+  pull_request:
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22.20.0
+      - uses: astral-sh/setup-uv@v6
+      - name: Install FFmpeg
+        run: sudo apt-get update && sudo apt-get install --yes ffmpeg
+      - name: Check skill discovery
+        run: npx --yes skills add . --list
+      - name: Compile Python scripts
+        run: python3 -m compileall -q skills
+      - name: Test video workbench
+        run: python3 skills/video-editing/tests/smoke_test.py
+      - name: Test video analyzer
+        run: python3 skills/analyze-video-editing/tests/smoke_test.py
+      - name: Typecheck Remotion starter
+        working-directory: skills/video-editing/assets/remotion-edit-template
+        run: npm ci && npm run typecheck
