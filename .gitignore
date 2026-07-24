@@ -14,3 +14,7 @@ build/
 analysis/
 work/
 output/
+!skills/video-editing/assets/edit-project-template/output/
+!skills/video-editing/assets/edit-project-template/output/.gitkeep
+!skills/video-editing/assets/edit-project-template/work/
+!skills/video-editing/assets/edit-project-template/work/.gitkeep
