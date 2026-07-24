@@ -38,6 +38,8 @@ The workbench accepts a JSON plan that points to an arbitrary FFmpeg filtergraph
 
 Paths are relative to the plan file unless absolute. `inputs` are passed to FFmpeg in order. The filtergraph must produce `video_map` and, when present, `audio_map`.
 
+The workbench detects the installed FFmpeg major version. It uses FFmpeg 8's `-/filter_complex` file-loading syntax when available and the older `-filter_complex_script` syntax on compatible earlier releases.
+
 For a silent render, omit `audio` and `audio_map`.
 
 `video.codec` names the encoder passed to FFmpeg. `validation.codec` names the decoded codec reported by FFprobe; for example, `h264_videotoolbox` produces `h264`. Use `validation.profile` when a codec profile matters. Use a list for `pixel_formats` when more than one observed alpha-capable representation is acceptable.

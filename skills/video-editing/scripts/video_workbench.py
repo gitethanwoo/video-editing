@@ -35,6 +35,23 @@ def require_media_tools() -> None:
         fail(f"Missing required tools: {', '.join(missing)}")
 
 
+def filtergraph_file_args(filtergraph: Path) -> list[str]:
+    version_result = run(["ffmpeg", "-version"], capture=True)
+    version_match = re.search(r"^ffmpeg version\s+([0-9]+)", version_result.stdout)
+    if version_match and int(version_match.group(1)) >= 8:
+        return ["-/filter_complex", str(filtergraph)]
+
+    help_result = run(
+        ["ffmpeg", "-hide_banner", "-h", "full"],
+        capture=True,
+        check=False,
+    )
+    help_text = help_result.stdout + help_result.stderr
+    if "-filter_complex_script" in help_text:
+        return ["-filter_complex_script", str(filtergraph)]
+    fail("This FFmpeg build cannot load a complex filtergraph from a file")
+
+
 def ffprobe(path: Path) -> dict:
     result = run(
         [
@@ -564,7 +581,7 @@ def render_ffmpeg_command(plan_path: Path) -> None:
         command = ["ffmpeg", "-hide_banner", "-y"]
         for source in inputs:
             command.extend(["-i", str(source)])
-        command.extend(["-/filter_complex", str(filtergraph)])
+        command.extend(filtergraph_file_args(filtergraph))
         command.extend(["-map", str(plan.get("video_map", "[vout]"))])
         if plan.get("audio_map") is not None:
             command.extend(["-map", str(plan["audio_map"])])
