@@ -9,7 +9,7 @@ Edit whatever footage the user supplies. This is a general workbench, not a pres
 
 Set `SKILL_DIR` to the absolute directory containing this file. Resolve bundled scripts, references, assets, and examples relative to it.
 
-When the primary request is to reverse-engineer a finished reference film—shots, camera behavior, sound, titles, pacing, and interview/B-roll grammar—use the adjacent `analyze-video-editing` skill first, then bring its evidence and transferable principles back into this editing workflow.
+When the primary request is to reverse-engineer a finished reference film—shots, camera behavior, sound, titles, pacing, and interview/B-roll grammar—use the adjacent `analyze-video-editing` skill first. When the request is to find, vet, or place cutaways against spoken words, use the adjacent `find-broll` skill before bringing its approved manifest into this editing workflow.
 
 Initialize a neutral edit workspace when the task does not already have one:
 

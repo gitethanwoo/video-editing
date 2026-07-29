@@ -114,7 +114,7 @@ Extract principles, not imitations. For each device, state:
 
 Example: “A four-second dip to black works here because the opening movement has accumulated tension and the continuing environmental sound prevents the reset from feeling like the video ended.”
 
-If the user wants to apply the result, hand the evidence and selected principles to the `video-editing` skill. Do not encode the reference film's exact timings, fonts, or transitions as defaults.
+If the user wants to apply the result, hand the evidence and selected principles to the `find-broll` skill for cutaway sourcing and then to `video-editing` for production. Do not encode the reference film's exact timings, fonts, or transitions as defaults.
 
 ## Quality bar
 
