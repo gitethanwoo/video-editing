@@ -1,0 +1,4 @@
+interface:
+  display_name: "Find B-roll"
+  short_description: "Source accurate, on-brand cutaways for spoken video"
+  default_prompt: "Use $find-broll to plan, source, approve, and precisely place B-roll for this talking-head video."
