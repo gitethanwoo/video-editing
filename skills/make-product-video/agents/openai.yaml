@@ -1,0 +1,4 @@
+interface:
+  display_name: "Make Product Video"
+  short_description: "Produce narrated product videos in three styles"
+  default_prompt: "Use $make-product-video to plan and produce a narrated video of this product or change."

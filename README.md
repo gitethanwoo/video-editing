@@ -10,6 +10,8 @@ General-purpose skills and deterministic tools for understanding and editing arb
 |---|---|
 | `analyze-video-editing` | Reverse-engineering shots, camera motion, titles, dialogue, music, sound design, pacing, and editorial structure |
 | `find-broll` | Planning, sourcing, vetting, approving, and precisely placing authoritative B-roll against spoken words |
+| `make-product-video` | Narrated product demos, walkthroughs, sizzle reels, and launch videos with ElevenLabs voiceover, music, and sound effects |
+| `record-agent-browser-demo` | Recording rehearsed, review-ready web app walkthroughs with Agent Browser, with frame QA and optional GitHub attachment |
 | `video-editing` | Cutting footage, compositing multiple sources, mixing audio, creating React/SVG/Remotion graphics, rendering, reviewing, and validating deliverables |
 
 The repository deliberately separates analysis, sourcing, and production. Reference films become evidence and transferable principles; B-roll choices retain provenance and approval state; rendering remains deterministic and validated.
@@ -33,6 +35,8 @@ Or install one:
 ```bash
 npx skills add gitethanwoo/video-editing --skill analyze-video-editing
 npx skills add gitethanwoo/video-editing --skill find-broll
+npx skills add gitethanwoo/video-editing --skill make-product-video
+npx skills add gitethanwoo/video-editing --skill record-agent-browser-demo
 npx skills add gitethanwoo/video-editing --skill video-editing
 ```
 
@@ -60,6 +64,8 @@ The open [`skills`](https://github.com/vercel-labs/skills) CLI supports Codex, C
 - `mlx-whisper` only for optional Apple Silicon speech transcription
 - `yt-dlp` only for authorized reference downloads
 - A browser only when capturing or verifying public pages for B-roll
+- The [`agent-browser`](https://github.com/vercel-labs/agent-browser) CLI only for recording web app demos
+- The `elevenlabs` CLI, logged in, only for product-video voiceover, music, and sound effects
 
 The bundled scripts inspect real media payloads before constructing timelines or parsing outputs. Model descriptions are treated as hypotheses whenever deterministic signal evidence disagrees.
 
