@@ -166,6 +166,22 @@ Pacing rules:
 
 Always call `record stop`, including on error. Confirm the command reports the exact saved path.
 
+### Frame capture for produced videos
+
+When the footage feeds an edit (a tutorial or product video) rather than a review, capture frames instead of using `record start`. Live encoding drops or stretches frames when the machine is busy; frames on disk with timestamps do not.
+
+```text
+node scripts/screencast.mjs "$(agent-browser --session <final-session> get cdp-url)" raw/ <url-substring> &
+# ...drive the rehearsed flow, logging `<epoch seconds>\t<step name>` before each step...
+kill -INT <pid>                                   # writes raw/frames.json
+python3 scripts/frames_to_mp4.py raw/ raw.mp4 --hold 2.5
+```
+
+- `screencast.mjs` attaches to the page whose URL contains the substring and saves every CDP screencast frame with its timestamp. Chrome sends frames only on repaint, so frame durations come from timestamps; `frames_to_mp4.py` builds a constant-rate MP4 from them.
+- Time 0 of `raw.mp4` is the first frame. Convert the step log to times relative to `frames.json[0].t`, and those marks line up with the video.
+- Wait for `raw/started` before the first action, and stop the capture before closing the session.
+- Client-side navigation keeps the same page target, so one capture can follow a flow across routes. Injected cursors and CSS survive client-side navigation but not full page loads.
+
 ## Phase G: deterministic QA
 
 Run:
