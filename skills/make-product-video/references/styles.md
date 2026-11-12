@@ -1,8 +1,9 @@
-# The three styles
+# The styles
 
 - [Walkthrough](#walkthrough)
 - [Sizzle reel](#sizzle-reel)
 - [Element film](#element-film)
+- [Tutorial](#tutorial)
 - [Recording real UI](#recording-real-ui)
 
 ## Walkthrough
@@ -76,6 +77,31 @@ Scenes are windows such as `[at("line") - 0.3, at("run") - 0.3]`, so regeneratin
 
 **Sound.** Voice over a quiet bed, with the cursor's clicks.
 
+## Tutorial
+
+Teaches a customer one task in the real product, in 45 to 75 seconds: one video per task, made to sit next to the screen it explains.
+
+**Shape.** Title card, then how to get there, then one numbered step per setting or action, then a logo end card. Start every tutorial from a page the viewer already knows (the dashboard home) and show the path: sidebar item → record → tab. Viewers who skip it don't know where the settings live. End on the logo unless asked for a "next up" card.
+
+**Script.** One voice line per step, said while the step happens. Name only what the footage shows: for an option the take doesn't change, hover over it while the line names it ("you can also open it automatically on desktop"); don't toggle it and don't describe behavior the viewer can't see.
+
+**Picture.** One scripted take of the whole task, captured as timestamped frames (`record-agent-browser-demo`, "Frame capture for produced videos"), placed in a Remotion composition at 1920x1080 and 30 fps:
+
+- A camera of keyframes `[time, cx, cy, zoom]` in page CSS pixels, clamped to stay inside the page. Zoom on the area being worked (1.2 to 1.3 for a settings column with its live preview) and open out to 1.0 between areas. During navigation, zoom toward the control about to be clicked; that also keeps unrelated content out of frame.
+- Rings: a cyan outline with a pulsing glow inside the camera layer, in page coordinates, so they track zooms. Ring the place where the result appears (a live preview, a list that gains a row), not the input being edited; outlines around form controls rarely fit the control and collide with popovers. During navigation, ring each click target as the cursor reaches it.
+- A step chip (number and label) in a corner the camera never needs, shown for each step's segment.
+
+**Timing.** The take script logs a mark before each step; everything is built from the marks, so a re-take re-times the film:
+
+1. One voiceover clip per step. Segment `i` runs from mark `i` to mark `i + 1`.
+2. `speed = segment length / (clip length + 0.65 s)`, clamped to between 1.0 and 1.25. Faster than 1.25 makes cursor motion and typing look unnatural. Hold the last frame when the line is longer.
+3. Map raw times to film times through the segments; camera keyframes and rings are written in raw time relative to marks and mapped the same way.
+4. Time each ring from the pixels, not by guessing: diff consecutive raw frames inside the ring's region (PIL `ImageChops.difference`) and start the ring when the region changes. Saves and previews often land 1 to 3 s after the click.
+
+Generate the timeline JSON (segments, camera, rings), the retimed footage (FFmpeg `trim`, `setpts`, `tpad`, `concat`) and the mix file from one build script.
+
+**Sound.** Voice over a calm, steady bed generated at the final length, ducked under the voice.
+
 ## Recording real UI
 
 `record-agent-browser-demo` has the procedure. For footage that goes into a produced video:
@@ -86,4 +112,7 @@ Scenes are windows such as `[at("line") - 0.3, at("run") - 0.3]`, so regeneratin
 - **Motion.** `record start --cursor`, `mouse move --duration --human`, a pause before each click, and scrolling with an eased `requestAnimationFrame` loop run through `eval`.
 - **Display.** Screenshots and recordings hang when the display sleeps. `caffeinate -d -u` in a background shell keeps it awake.
 - **zsh.** `VAR=x source lib.sh` does not keep `VAR`; export it first.
-- **Takes.** One small re-runnable script per shot or act.
+- **Takes.** One small re-runnable script per shot or act, plus a reset script that returns the data to its starting state before every take.
+- **Fixtures and tours.** Dev seed data often includes test records; hide them with injected CSS (`div:has(> div > a[href="..."]) { display: none !important }`) rather than deleting shared data. Dismiss onboarding tours and "what's new" popovers once before the take; they overlay the page and swallow clicks. A fresh browser profile brings them back.
+- **Stray text.** Frame the camera so seed text that doesn't belong in a customer video (placeholder prompts, test names) stays out of shot.
+- **Screencast size.** At `set viewport 1600 900 2` the CDP screencast delivers 1600x900 frames; zooms above about 1.3 on 1080p output start to soften.

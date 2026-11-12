@@ -1,6 +1,6 @@
 ---
 name: make-product-video
-description: Make a narrated product video from a working app, such as a demo, walkthrough, sizzle reel, launch video or feature announcement. Picture comes from agent-browser recordings or Remotion; voiceover (Eleven v4), music and sound effects come from the ElevenLabs CLI. Covers three styles, v4 voice direction, mixing and delivery.
+description: Make a narrated product video from a working app, such as a demo, walkthrough, how-to tutorial, sizzle reel, launch video or feature announcement. Picture comes from agent-browser recordings or Remotion; voiceover (Eleven v4), music and sound effects come from the ElevenLabs CLI. Covers four styles, v4 voice direction, mixing and delivery.
 ---
 
 # Make a product video
@@ -12,13 +12,14 @@ This skill helps produce narrated product videos. It leans on two other skills:
 
 ## Styles
 
-There are three. They differ in where the picture comes from, how long they run, and what drives the timing.
+There are four. They differ in where the picture comes from, how long they run, and what drives the timing.
 
 | Style | What the viewer sees | Typical length | Picture source | Timing follows |
 | --- | --- | --- | --- | --- |
 | **Walkthrough** | Whole real screens, flows played start to finish, a title card per act | 2 to 6 minutes | Screen recordings of the running app | Each recorded segment is sped up or held to fit its narration line |
 | **Sizzle reel** | Real screens inside a designed frame, camera moves, a few title lines | 60 to 90 seconds | Screen recordings composited in Remotion | Scenes sit on the music's phrases; voice lines are placed in them |
 | **Element film** | One thing at a time, centered on a plain background: a line of text or a single UI element lifted out of the product | 20 to 60 seconds | The element rebuilt as React/SVG in Remotion | Every animation is keyed to a word in the voiceover |
+| **Tutorial** | The real product doing one task, from navigation to result, with zooms, rings on what changed and numbered step chips | 45 to 75 seconds | One scripted take, captured as timestamped frames, composited in Remotion | Each step's footage is retimed to its voice line from marks logged during the take |
 
 [references/styles.md](references/styles.md) describes how each one is built.
 

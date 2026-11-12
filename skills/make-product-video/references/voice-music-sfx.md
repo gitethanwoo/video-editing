@@ -117,6 +117,7 @@ elevenlabs music compose --json "$(python3 -c 'import json;print(json.dumps({"co
 - A section is at least 3000 ms.
 - Set the plan's total to the film's length. For an ending that holds, ask for a final section at steady volume with "fade out" and "silence" as negative styles, and fade it in the mix. `ffmpeg -af silencedetect` shows whether a cue drops out early.
 - Each generation is a new piece. Save cues under separate names.
+- When the film's length changes, generate a new cue at the new length. `atempo` stretching beyond about 3 percent audibly drags or rushes the bed.
 
 ## Sound effects
 
