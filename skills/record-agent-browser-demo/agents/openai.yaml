@@ -1,0 +1,4 @@
+interface:
+  display_name: "Record Agent Browser Demo"
+  short_description: "Create polished browser demo videos"
+  default_prompt: "Use $record-agent-browser-demo to record and verify a polished walkthrough of this web flow."
